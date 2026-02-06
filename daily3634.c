@@ -19,21 +19,19 @@ int minRemoval(int* nums, int numsSize, int k) {
 
     else{
 
-        int global_removals = 1000000;
+        int global_removals = numsSize;
 
+        int y = 0;
         for(int i = 0; i < numsSize; i++){
 
-            int x = i;
-            int y = numsSize - 1;
-            int local_removals = i;
+            long long current = (long long)nums[i] * k;
 
-            int current = nums[x] * k;
-
-            while(current < nums[y]){
-                y--;
-                local_removals ++;
+            while(y < numsSize && nums[y] <= current){
+                y++;
             }
-            if(local_removals < global_removals){
+            int local_removals = i + numsSize - y;
+            
+            if(local_removals < global_removals) {
                 global_removals = local_removals;
             }
         }
