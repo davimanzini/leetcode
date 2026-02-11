@@ -7,15 +7,6 @@ struct TreeNode {
     struct TreeNode *right;
 };
 
-#include <stdbool.h>
-#include <stdlib.h>
-
-struct TreeNode {
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-};
-
 bool compare(struct TreeNode *esq, struct TreeNode *dir){
 
     if((esq == NULL) && (dir == NULL)){
@@ -48,3 +39,4 @@ bool isSymmetric(struct TreeNode* root) {
         return false;
     }
 }
+
