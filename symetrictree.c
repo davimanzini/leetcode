@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 struct TreeNode {
     int val;
@@ -7,13 +7,23 @@ struct TreeNode {
     struct TreeNode *right;
 };
 
-bool compara(struct TreeNode *esq, struct TreeNode *dir){
-    if((esq->right->val == dir->left->val) && (esq->left->val == dir->right->val)){
+bool compare(struct TreeNode *esq, struct TreeNode *dir){
+
+    if((esq == NULL) && (dir == NULL)){
         return true;
     }
-    else{
+    if((esq == NULL) || (dir == NULL)){
         return false;
     }
+    if((esq->left->val == dir->right->val) &&
+     (esq->right->val == dir->left->val)){
+        return true;
+     }
+     else{
+        return false;
+     }
+
+     compare(esq->left, dir->right);
 }
 
 bool isSymmetric(struct TreeNode* root) {
@@ -21,23 +31,13 @@ bool isSymmetric(struct TreeNode* root) {
     if(root == NULL){
         return true;
     }
-    if((root->left == NULL) && (root->right == NULL)){
-        return true;
-    }
-    if((root->left == NULL) || (root->right== NULL)){
-        return false;
-    }
+    
+    bool sym = compare(root->left, root->right);
 
-    bool is_sym = compara(root->left, root->right);
-
-    bool left_ok = isSymmetric(root->left);
-    bool right_ok = isSymmetric(root->right);
-
-    if(left_ok && right_ok && is_sym){
+    if(sym == true){
         return true;
     }
     else{
         return false;
     }
-
 }
