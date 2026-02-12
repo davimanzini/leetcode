@@ -1,3 +1,12 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};
+
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -15,15 +24,13 @@ bool compare(struct TreeNode *esq, struct TreeNode *dir){
     if((esq == NULL) || (dir == NULL)){
         return false;
     }
-    if((esq->left->val == dir->right->val) &&
-     (esq->right->val == dir->left->val)){
-        return true;
-     }
-     else{
+    if(esq->val != dir->val){
         return false;
-     }
-
-     compare(esq->left, dir->right);
+    }
+    else{
+        return (compare(esq->left, dir->right) && (compare(esq->right, dir->left)));
+    }
+     
 }
 
 bool isSymmetric(struct TreeNode* root) {
