@@ -7,7 +7,7 @@ public:
         
         int i = 0;
         int j = colors.size() - 1;
-        int max_dist;
+        int max_dist = 0;
 
         for(int k = 0; k < colors.size(); k++){
             if(colors[i] != colors[k]){
