@@ -1,10 +1,8 @@
-#include <iostream>
-using namespace std;
-
 class Solution {
 public:
 
-    void backtrack(vector<vector<int>> &perms, vector<int> nums, vector<int> &curr){
+    void backtrack(vector<vector<int>> &perms, vector<int> nums,
+        vector<int> &curr, vector<bool> &uses){
 
         int n = nums.size();
 
@@ -13,10 +11,18 @@ public:
                 return;
         }
 
-        for(int x : nums){
-            
-            curr.push_back(x);
+
+        for(int i = 0; i < n; i++){
+            if(uses[i] == true){
+                continue;
+            }
+            curr.push_back(nums[i]);
+            uses[i] = true;
+            backtrack(perms, nums, curr, uses);
+            uses[i] = false;
+            curr.pop_back();
         }
+        return;
     }
 
 
@@ -24,7 +30,9 @@ public:
         
         vector<vector<int>> perms;
         vector<int> curr;
-        backtrack(perms, nums, curr);
+        vector<bool> uses(nums.size(), false);
+
+        backtrack(perms, nums, curr, uses);
         return perms;
     }
 };
