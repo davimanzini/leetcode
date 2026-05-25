@@ -13,27 +13,31 @@ class Solution {
             int j = 0;
             int count = 0;
 
-            while(i < n){
-                while(j < m && i < n){
-                    if(count < n){
+            while(i < n && i >= 0){
+                while((j < m && j >= 0) && (i < n && i >= 0)){
+                    if(count < m){
                         ans.push_back(matrix[i][j]);
                         j++;
                     }
-                    else if(count < n + m - 1){
+                    else if(count < m + n - 1){
                         ans.push_back(matrix[i][j]);
                         i++;
                     }
-                    else if(count < (2 * n) + m - 2){
+                    else if(count < (2 * m) + n - 2){
                         ans.push_back(matrix[i][j]);
                         j--;
+                    }
+                    else if(count < (2 * m) + (2 * n) - 4){
+                        ans.push_back(matrix[i][j]);
+                        i--;
                     }
                     else{
                         break;
                     }
-                    count ++;
+                    count++;
                 }
                 //quebras de direcao
-                if(count == n){
+                if(count == m){
                     j--;
                     i++;
                 }
@@ -41,11 +45,13 @@ class Solution {
                     i--;
                     j--;
                 }
-                else if(count == (2 * n) + m - 2){
+                else if(count == (2 * m) + n - 2){
                     j++;
                     i--;
                 }
-                
+                else if(count  == (2 * m) + (2 * n) - 4){
+                    break;
+                }
             }
             return ans;
         }
