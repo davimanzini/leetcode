@@ -19,7 +19,9 @@ public:
             if(height[i] <= height[j]){
                 i++;
             }
-            j--;
+            else{
+                j--;
+            }
         }
         return max_area;
     }

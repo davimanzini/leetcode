@@ -16,7 +16,7 @@ public:
                 i++;
             }
             else{
-                j++;
+                j--;
             }
         }
         return {i + 1, j + 1};

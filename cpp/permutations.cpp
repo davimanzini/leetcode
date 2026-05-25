@@ -1,7 +1,11 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
 
-    void backtrack(vector<vector<int>> &perms, vector<int> nums,
+    void backtrack(vector<vector<int>> &perms, vector<int> &nums,
+        
         vector<int> &curr, vector<bool> &uses){
 
         int n = nums.size();

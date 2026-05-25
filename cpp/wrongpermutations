@@ -28,3 +28,36 @@ public:
         return ans;
     }
 };
+
+//ops i did again lmao
+/*
+class Solution {
+public:
+
+    void backtrack(vector<vector<int>> &perms, vector<int> nums, vector<int> &curr){
+
+        int n = nums.size();
+
+        if(curr.size() == n){ //tamanho de retorno
+                perms.push_back(curr);
+                return;
+        }
+
+        for(int i = 0; i < n; i++){
+            curr.push_back(nums[i]);
+            backtrack(perms, nums, curr);
+            curr.pop_back();
+        }
+        return;
+    }
+
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        
+        vector<vector<int>> perms;
+        vector<int> curr;
+        backtrack(perms, nums, curr);
+        return perms;
+    }
+};
+*/
