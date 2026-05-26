@@ -13,59 +13,91 @@ class Solution {
             int i = 0;
             int j = 0;
             int count = 0;
-            int num_spirals = ceil(n/2);
+            int num_spirals = ceil(n/2.0);
+            int direcao = 1;
+            int lim_esquerdo = 0;
+            int lim_direito = m;
+            int lim_superior = 0;
+            int lim_inferior = n;
 
             while(k < num_spirals){
+                while(i < lim_inferior && i >= lim_superior){
+                    while((j < lim_direito && j >= lim_esquerdo) && (i < lim_inferior && i >= lim_superior)){
 
-                while(i < n && i >= 0){
-                    while((j < m && j >= 0) && (i < n && i >= 0)){
-                        if(count < m){
+                        if(direcao == 1){
                             ans.push_back(matrix[i][j]);
+                            cout << "coloquei " << matrix[i][j]<< "direcao " << direcao << endl;
                             j++;
                         }
-                        else if(count < m + n - 1){
+                        else if(direcao == 2){
                             ans.push_back(matrix[i][j]);
+                            cout << "coloquei " << matrix[i][j]<< "direcao " << direcao << endl;
                             i++;
                         }
-                        else if(count < (2 * m) + n - 2){
+                        else if(direcao == 3){
                             ans.push_back(matrix[i][j]);
+                            cout << "coloquei " << matrix[i][j]<< "direcao " << direcao << endl;
                             j--;
                         }
-                        else if(count < (2 * m) + (2 * n) - 4){
+                        else if(direcao == 4){
+                            if(i == lim_superior && j == lim_esquerdo || (m == 1)) break; //voltou pro comeco
                             ans.push_back(matrix[i][j]);
+                            cout << "coloquei " << matrix[i][j]<< "direcao " << direcao << endl;
                             i--;
                         }
-                        else{
-                            break;
-                        }
-                        count++;
                     }
-                    //quebras de direcao
-                    if(count == m){
-                        j--;
-                        i++;
-                    }
-                    else if(count == n + m - 1){
-                        i--;
-                        j--;
-                    }
-                    else if(count == (2 * m) + n - 2){
-                        j++;
-                        i--;
-                    }
-                    else if(count  == (2 * m) + (2 * n) - 4){
-                        break;
-                    }
-                }
-                //atualiza dimensoes
-                n -= 2;
-                m -= 2;
-                k++;
 
-                i = 1;
-                j = 1;
-                count = 0;
+                    if(direcao == 1){
+                        direcao = 2;
+                        i++;
+                        j--;
+                    } 
+                    else if(direcao == 2){
+                        if(lim_superior < lim_inferior - 1){
+                            direcao = 3;
+                            i--;
+                            j--;
+                        }
+                        else break;
+                    } 
+                    else if(direcao == 3){
+                        if(lim_esquerdo < lim_direito - 1){
+                            direcao = 4;
+                            i--;
+                            j++;                            
+                        }
+                        else break;
+                    } 
+                    else break; //saiu da 4 etapa, encerrou;
+                }
+
+                direcao = 1;
+            
+                lim_esquerdo += 1;
+                lim_direito -= 1;
+                lim_superior += 1;
+                lim_inferior -= 1;
+
+                i = lim_superior;
+                j = lim_esquerdo;
+
+                k++;
             }
             return ans;
         }
+};
+
+int main() {
+
+    vector<vector<int>> matrix = {
+        {7},
+        {9},
+        {6}
     };
+
+    Solution s;
+
+    vector<int> ans = s.spiralOrder(matrix);
+    
+    cout << endl;
+}
