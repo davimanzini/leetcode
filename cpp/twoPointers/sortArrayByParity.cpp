@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        int n = nums.size();
+        int i = 0;
+        int j = n - 1;
+
+        while(i < j){
+            int currLeft = nums[i];
+            int currRight = nums[j];
+            if((currLeft % 2 != 0) && (currRight % 2 == 0)){
+                swap(nums[i], nums[j]);
+                i++;
+                j--;
+            }
+            if(currLeft % 2 == 0){
+                if(currRight % 2 != 0) j--;
+                i++;
+            }
+            else j--;
+        }
+        return nums;
+    }
+};
