@@ -16,7 +16,7 @@ public:
                 i++;
                 j--;
             }
-            if(currLeft % 2 == 0){
+            else if(currLeft % 2 == 0){
                 if(currRight % 2 != 0) j--;
                 i++;
             }
