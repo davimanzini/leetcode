@@ -5,18 +5,16 @@ class Solution {
 public:
     int minimumPushes(string word) {
         
-        unordered_map<char, int> mp;
-        vector<int> freq;
-        for(char c : word) mp[c]++;
-        for(auto p : mp) freq.push_back(p.second);
+        vector<int> freq(26, 0);
+        for(char c : word) freq[c - 'a']++;
         sort(freq.begin(), freq.end(), greater<int>());
 
-        int count = 0;
         int ans = 0;
-
+        int count = 0;
         for(int x : freq){
+            if(x == 0) break;
             int clicks = (count / 8) + 1;
-            ans += x * clicks;
+            ans += clicks * x;
             count++;
         }
         return ans;
