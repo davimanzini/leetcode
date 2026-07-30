@@ -16,7 +16,6 @@ public:
             count ++;
         }
         ans += count * tam;
-        return ans;
-        
+        return ans; 
     }
 };
